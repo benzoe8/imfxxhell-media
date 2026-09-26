@@ -3,89 +3,149 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
 <title>預約｜雷諾曼占卜・紫微斗數 @imfxxhell.tw</title>
 <meta name="description" content="紫微斗數文字報告、塔羅語音解讀、自製月老御守。挑一張表單填寫即可預約。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Noto+Serif+TC:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Serif+TC:wght@300;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#f4f0e6; --paper-alt:#ece6d8; --deep:#1f3a4d; --deep-2:#2f5568;
-    --ink:#1c1a17; --ink-soft:#6f675c; --accent:#c4623f; --accent-soft:#e8c4b2;
-    --line:#06c755;
+    color-scheme: light dark;
+    --paper:#f4f0e6; --paper-alt:#ece6d8; --surface:#ffffff;
+    --deep:#1f3a4d; --deep-2:#2f5568;
+    --ink:#1c1a17; --ink-soft:#615a50;
+    --accent:#a5462a;            /* 文字用：在紙色與白卡上都超過 4.5:1 */
+    --accent-soft:#e8c4b2;
+    --line-green:#067a3d;        /* 白字對比 5.44:1 */
+    --hairline:rgba(28,26,23,.12);
+    --shadow:0 1px 2px rgba(28,26,23,.06), 0 6px 18px rgba(28,26,23,.05);
+    --radius:0.75rem;            /* 全站統一圓角 12px */
+    --press:cubic-bezier(.2,.7,.3,1);
   }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#15212b; --paper-alt:#1d2c38; --surface:#1d2c38;
+      --deep:#101a22; --deep-2:#26384a;
+      --ink:#ece6d8; --ink-soft:#a9a294;
+      --accent:#d4795a;          /* 深底上的磚紅，4.55:1 */
+      --hairline:rgba(236,230,216,.14);
+      --shadow:0 1px 2px rgba(0,0,0,.35), 0 8px 22px rgba(0,0,0,.28);
+    }
+  }
+
   *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
   body{
     background:var(--paper); color:var(--ink);
-    font-family:"Noto Serif TC",serif; line-height:1.7;
-    padding:0 16px 56px; -webkit-text-size-adjust:100%;
+    font-family:"Noto Serif TC",serif;
+    font-size:1rem; line-height:1.7;
+    padding:0 1rem calc(3rem + env(safe-area-inset-bottom));
+    -webkit-tap-highlight-color:transparent;   /* 關掉 iOS 灰框，改用自訂回饋 */
   }
-  .wrap{max-width:520px;margin:0 auto}
+  .wrap{max-width:33rem;margin:0 auto}
+
   header{
-    margin:0 -16px 26px; padding:44px 24px 34px;
+    margin:0 -1rem 1.75rem;
+    padding:calc(2.75rem + env(safe-area-inset-top)) 1.5rem 2.25rem;
     background:var(--deep); color:#f3ede1; text-align:center;
   }
-  header .mark{display:block;margin:0 auto 14px}
+  header .mark{display:block;margin:0 auto .9rem}
   header .kicker{
-    font-family:"Cormorant Garamond",serif; font-size:13px; letter-spacing:.38em;
-    text-transform:uppercase; opacity:.8;
+    font-family:"Cormorant Garamond",serif; font-size:.8rem; line-height:1.4;
+    letter-spacing:.34em; text-transform:uppercase; opacity:.85;
   }
-  header h1{margin-top:8px;font-size:23px;font-weight:700;letter-spacing:.08em}
-  header p{margin-top:12px;font-size:14px;font-weight:300;opacity:.86}
+  header h1{
+    margin-top:.5rem; font-size:1.5rem; font-weight:700;
+    line-height:1.25; letter-spacing:-.01em;   /* 字大就把字距收緊 */
+  }
+  header p{margin-top:.75rem; font-size:.9rem; font-weight:300; line-height:1.65; opacity:.9}
+
   h2{
-    margin:34px 0 4px; font-size:19px; font-weight:700; letter-spacing:.04em;
-    display:flex; align-items:baseline; gap:10px;
+    margin:2.25rem 0 .25rem; font-size:1.2rem; font-weight:700;
+    line-height:1.4; letter-spacing:0;
+    display:flex; align-items:baseline; gap:.6rem;
   }
-  h2 span{font-family:"Cormorant Garamond",serif;font-size:13px;letter-spacing:.2em;color:var(--accent);text-transform:uppercase}
-  .note{font-size:13px;color:var(--ink-soft);font-weight:300}
-  a.card{
-    display:block; margin-top:12px; padding:16px 18px; border-radius:12px;
-    background:#fff; border:1px solid rgba(28,26,23,.1); text-decoration:none; color:inherit;
-    box-shadow:0 1px 2px rgba(28,26,23,.04);
+  h2 span{
+    font-family:"Cormorant Garamond",serif; font-size:.8rem; font-weight:600;
+    letter-spacing:.2em; text-transform:uppercase; color:var(--accent);
   }
-  a.card:active{background:var(--paper-alt)}
-  .row{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
-  .row b{font-size:17px;font-weight:700;letter-spacing:.03em}
-  .row .price{font-family:"Cormorant Garamond",serif;font-size:21px;color:var(--accent);white-space:nowrap}
-  .card p{margin-top:5px;font-size:13.5px;font-weight:300;color:var(--ink-soft)}
-  .steps{margin-top:14px;counter-reset:s}
+  .note{font-size:.85rem; line-height:1.65; color:var(--ink-soft); font-weight:300}
+
+  /* 可點的東西共用一套按壓行為 */
+  .tap{
+    display:block; text-decoration:none; color:inherit;
+    border-radius:var(--radius);
+    transition:transform 140ms var(--press), background-color 140ms var(--press);
+  }
+  .tap:active{transform:scale(.975)}
+  .tap:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
+  @media (hover:hover){
+    .card:hover{background:var(--paper-alt)}
+    .btn-line:hover{filter:brightness(1.08)}
+    .btn-ghost:hover{background:var(--deep)}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .tap{transition:background-color 120ms linear}
+    .tap:active{transform:none; background:var(--paper-alt)}
+  }
+
+  .card{
+    margin-top:.75rem; padding:1rem 1.1rem;
+    background:var(--surface); border:1px solid var(--hairline); box-shadow:var(--shadow);
+  }
+  .card:active{background:var(--paper-alt)}
+  .row{display:flex; justify-content:space-between; align-items:baseline; gap:.9rem}
+  .row b{font-size:1.05rem; font-weight:700; line-height:1.45; letter-spacing:0}
+  .row .price{
+    font-family:"Cormorant Garamond",serif; font-size:1.3rem; font-weight:600;
+    color:var(--accent); white-space:nowrap; letter-spacing:.01em;
+  }
+  .card p{margin-top:.35rem; font-size:.85rem; font-weight:300; line-height:1.65; color:var(--ink-soft)}
+
+  .steps{margin-top:.9rem; counter-reset:s}
   .steps li{
     list-style:none; counter-increment:s; position:relative;
-    padding:10px 0 10px 40px; font-size:14.5px; font-weight:300;
-    border-bottom:1px solid rgba(28,26,23,.08);
+    padding:.65rem 0 .65rem 2.5rem; font-size:.92rem; font-weight:300; line-height:1.7;
+    border-bottom:1px solid var(--hairline);
   }
   .steps li:last-child{border-bottom:0}
   .steps li::before{
-    content:counter(s,decimal-leading-zero); position:absolute; left:0; top:10px;
-    font-family:"Cormorant Garamond",serif; font-size:15px; color:var(--accent); letter-spacing:.1em;
+    content:counter(s,decimal-leading-zero); position:absolute; left:0; top:.65rem;
+    font-family:"Cormorant Garamond",serif; font-size:.95rem; font-weight:600;
+    color:var(--accent); letter-spacing:.1em;
   }
   .steps b{font-weight:700}
+
   .box{
-    margin-top:14px; padding:16px 18px; border-radius:12px;
-    background:var(--paper-alt); font-size:14px; font-weight:300;
+    margin-top:.9rem; padding:1rem 1.1rem; border-radius:var(--radius);
+    background:var(--paper-alt); font-size:.88rem; font-weight:300; line-height:1.7;
   }
   .box b{font-weight:700}
-  .box ul{margin-top:8px;padding-left:18px}
-  .box li{margin-top:4px}
-  a.line{
-    display:flex; align-items:center; justify-content:center; gap:10px;
-    margin-top:14px; padding:16px; border-radius:12px;
-    background:var(--line); color:#fff; text-decoration:none;
-    font-size:16px; font-weight:700; letter-spacing:.06em;
+  .box ul{margin-top:.5rem; padding-left:1.15rem}
+  .box li{margin-top:.3rem}
+
+  /* 主要行動：實心。次要行動：同樣的框，但只有描邊 */
+  .btn{
+    margin-top:.7rem; padding:1rem; text-align:center;
+    font-size:1rem; font-weight:700; letter-spacing:.04em; line-height:1.4;
   }
-  a.ig{
-    display:block; margin-top:10px; padding:15px; border-radius:12px; text-align:center;
-    background:var(--deep-2); color:#f3ede1; text-decoration:none; font-size:15px; letter-spacing:.06em;
-  }
-  footer{margin-top:34px;text-align:center;font-size:12.5px;color:var(--ink-soft);font-weight:300}
-  footer .handle{font-family:"Cormorant Garamond",serif;letter-spacing:.16em}
+  .btn-line{background:var(--line-green); color:#fff}
+  .btn-line:active{background:#046b33}
+  .btn-ghost{background:transparent; color:var(--ink); border:1.5px solid var(--deep-2)}
+  .btn-ghost:active{background:var(--paper-alt)}
+  .btn-sub{font-size:.95rem; font-weight:500; padding:.85rem}
+
+  footer{margin-top:2.25rem; text-align:center; font-size:.8rem; line-height:1.7;
+         color:var(--ink-soft); font-weight:300}
+  footer .handle{font-family:"Cormorant Garamond",serif; letter-spacing:.16em}
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <header>
-    <svg class="mark" width="46" height="46" viewBox="0 0 64 64" fill="none" stroke="#f0e7d6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <svg class="mark" width="46" height="46" viewBox="0 0 64 64" fill="none" stroke="#f0e7d6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M44 10a23 23 0 1 0 13 35 19 19 0 0 1-13-35z"/>
       <path d="M17 13.5l2.6 6.1 6.1 2.6-6.1 2.6L17 30.9l-2.6-6.1L8.3 22.2l6.1-2.6z"/>
     </svg>
@@ -97,32 +157,32 @@
   <h2>紫微斗數 <span>report</span></h2>
   <div class="note">文字報告，1 到 3 個工作天寄到你的 email。需要國曆生日與出生時辰。</div>
 
-  <a class="card" href="https://docs.google.com/forms/d/e/1FAIpQLSfeEkIJHf40AZmDhKOn5ybYkYkMKubfG9riL98-vl4oNHQ4dg/viewform">
+  <a class="tap card" target="_blank" rel="noopener" href="https://docs.google.com/forms/d/e/1FAIpQLSfeEkIJHf40AZmDhKOn5ybYkYkMKubfG9riL98-vl4oNHQ4dg/viewform">
     <div class="row"><b>合盤</b><span class="price">$2,000</span></div>
     <p>兩個人的相處模式、合得來的地方、容易卡住的地方。需要兩個人的出生資料。</p>
   </a>
 
-  <a class="card" href="https://docs.google.com/forms/d/e/1FAIpQLSeAgAeSATOJkHnk3AWuUL79JrDC9b6u8WuC5lK5a8IcZIIxDg/viewform">
+  <a class="tap card" target="_blank" rel="noopener" href="https://docs.google.com/forms/d/e/1FAIpQLSeAgAeSATOJkHnk3AWuUL79JrDC9b6u8WuC5lK5a8IcZIIxDg/viewform">
     <div class="row"><b>流年運勢</b><span class="price">$1,000</span></div>
     <p>看一整年的節奏，什麼時候適合動、什麼時候先守。表單裡填你想看的西元年份。</p>
   </a>
 
-  <a class="card" href="https://docs.google.com/forms/d/e/1FAIpQLSe360NezOziYd1zfDsvYsPL2TULY9hXPvvZV6O2RCb9bl6enw/viewform">
+  <a class="tap card" target="_blank" rel="noopener" href="https://docs.google.com/forms/d/e/1FAIpQLSe360NezOziYd1zfDsvYsPL2TULY9hXPvvZV6O2RCb9bl6enw/viewform">
     <div class="row"><b>流月分析</b><span class="price">$1,000</span></div>
     <p>比流年更近，看接下來幾個月的起伏。面向最多選三個。</p>
   </a>
 
-  <a class="card" href="https://docs.google.com/forms/d/e/1FAIpQLSeEjCK_Hu9lof5jsYcLXHSg6OAN31-bzjAv4upSQAaUtVum-Q/viewform">
+  <a class="tap card" target="_blank" rel="noopener" href="https://docs.google.com/forms/d/e/1FAIpQLSeEjCK_Hu9lof5jsYcLXHSg6OAN31-bzjAv4upSQAaUtVum-Q/viewform">
     <div class="row"><b>時辰推算</b><span class="price">$1,000</span></div>
     <p>不知道自己幾點出生的話，先做這個。沒有時辰，其他紫微服務都做不了。</p>
   </a>
 
-  <a class="card" href="https://docs.google.com/forms/d/e/1FAIpQLSealuasbw2ssRqVVKOfzfQYzd0LbStebYgiDim7_-nBfu9EPw/viewform">
+  <a class="tap card" target="_blank" rel="noopener" href="https://docs.google.com/forms/d/e/1FAIpQLSealuasbw2ssRqVVKOfzfQYzd0LbStebYgiDim7_-nBfu9EPw/viewform">
     <div class="row"><b>單題・什麼都可以問</b><span class="price">$600</span></div>
     <p>心裡就卡著一件事，只問那一件。問題請控制在 100 字以內，越具體越好。</p>
   </a>
 
-  <a class="card" href="https://docs.google.com/forms/d/e/1FAIpQLSc-Eh0SQCkMNi35xTKhFiahNr-HYwd-YWkaZ6jmkR11BjN0Sw/viewform">
+  <a class="tap card" target="_blank" rel="noopener" href="https://docs.google.com/forms/d/e/1FAIpQLSc-Eh0SQCkMNi35xTKhFiahNr-HYwd-YWkaZ6jmkR11BjN0Sw/viewform">
     <div class="row"><b>其他主題</b><span class="price">$600</span></div>
     <p>感情、工作、財運這類固定主題，從選單挑一個深入看。</p>
   </a>
@@ -130,13 +190,18 @@
   <h2>塔羅 <span>voice</span></h2>
   <div class="note">抽牌後用語音解讀，當天交件。不需要出生時辰。</div>
 
-  <a class="card" href="https://docs.google.com/forms/d/e/1FAIpQLSfHj1H_NUCEXYc_REDbmUUUly5XtlFo2BnYNM44vMeBDkE5cA/viewform">
+  <a class="tap card" target="_blank" rel="noopener" href="https://docs.google.com/forms/d/e/1FAIpQLSfHj1H_NUCEXYc_REDbmUUUly5XtlFo2BnYNM44vMeBDkE5cA/viewform">
     <div class="row"><b>抽牌解讀</b><span class="price">$300</span></div>
     <p>現在的狀況、接下來的走向、可以做的下一步。只要出生年跟想問的事。</p>
   </a>
 
   <h2>月老御守 <span>amulet</span></h2>
-  <div class="note">我自己做的，不是宮廟請的，也不是代購。單獨販售 $500，寄送方式私訊或 LINE 確認。</div>
+  <div class="note">我自己做的，不是宮廟請的，也不是代購。一次一個，做好寄給你。</div>
+
+  <a class="tap card" target="_blank" rel="noopener" href="https://line.me/R/ti/p/@437fuvoe">
+    <div class="row"><b>訂購御守</b><span class="price">$500</span></div>
+    <p>沒有表單，用 LINE 跟我說就可以。寄送方式我們再確認。</p>
+  </a>
 
   <h2>怎麼預約 <span>how to book</span></h2>
   <ol class="steps">
@@ -158,8 +223,8 @@
   </div>
 
   <h2>有問題先問這裡 <span>contact</span></h2>
-  <a class="line" href="https://line.me/R/ti/p/@437fuvoe">加 LINE 問問題</a>
-  <a class="ig" href="https://www.instagram.com/imfxxhell.tw/">回到 Instagram @imfxxhell.tw</a>
+  <a class="tap btn btn-line" target="_blank" rel="noopener" href="https://line.me/R/ti/p/@437fuvoe">加 LINE 問問題</a>
+  <a class="tap btn btn-ghost btn-sub" target="_blank" rel="noopener" href="https://www.instagram.com/imfxxhell.tw/">回到 Instagram @imfxxhell.tw</a>
 
   <footer>
     僅供娛樂與參考<br>
