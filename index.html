@@ -34,6 +34,14 @@
     }
   }
 
+  /* 系統開了「提高對比」：把淡字與細線都加深 */
+  @media (prefers-contrast: more){
+    :root{--ink-soft:#413c35; --hairline:rgba(28,26,23,.34)}
+  }
+  @media (prefers-contrast: more) and (prefers-color-scheme: dark){
+    :root{--ink-soft:#cfc8ba; --hairline:rgba(236,230,216,.38)}
+  }
+
   *{margin:0;padding:0;box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
   body{
